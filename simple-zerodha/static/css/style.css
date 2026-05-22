@@ -1,0 +1,149 @@
+/* ============================================
+   General Styles
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: #333;
+}
+
+/* Utility Classes */
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.spacer-lg {
+    margin-bottom: 30px;
+}
+
+.spacer-md {
+    margin-bottom: 15px;
+}
+
+/* Headings */
+h2 {
+    font-size: 35px;
+    font-weight: 400;
+    text-align: center;
+}
+
+p {
+    font-size: 25px;
+    text-align: center;
+    font-weight: 300;
+}
+
+/* Buttons */
+.btn-primary {
+    color: white;
+    background-color: #387ed1;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #2563a0;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+}
+
+/* ============================================
+   Header/Navbar Styles
+   ============================================ */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 100px;
+    padding-right: 100px;
+    box-shadow: 2px 1px 2px #eee;
+    background-color: white;
+}
+
+.navbar-logo {
+    width: 150px;
+    height: 20px;
+    padding-top: 15px;
+}
+
+.navbar-menu {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.navbar-item {
+    padding: 20px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    font-size: 14px;
+}
+
+.navbar-item:hover {
+    color: #387ed1;
+}
+
+/* ============================================
+   Hero Section
+   ============================================ */
+.hero-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.hero-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.hero-content {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-text-wrapper {
+    max-width: 800px;
+}
+
+.hero-title {
+    font-size: 35px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.hero-subtitle {
+    font-size: 25px;
+    text-align: center;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.5;
+}
+
+.hero-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
