@@ -23,9 +23,9 @@
             function addTodo() {
                 const todo = inputel.value;
                 const li = document.createElement("li");
-                li.textContent = `${count}. ${todo}`;
+                li.textContent = `${count}. ${todo} `;
                 const deletebtn=document.createElement("button");
-                deletebtn.content="🗑️";
+                deletebtn.textContent="trash";
                 deletebtn.onclick = function() {
                     li.remove();
                 };
