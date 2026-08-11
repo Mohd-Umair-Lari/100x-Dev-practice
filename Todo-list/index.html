@@ -8,18 +8,32 @@
         <title>Todo List</title>
     </head>
     <body>
-        <h1>Todo List</h1>
-        <h2>Add a new todo</h2>
+        <h1>My Todo List</h1>
+        <h3>Add a new todo</h3>
         <div>
             <input type="text" id="todo-input" placeholder="Enter a job">
             <button onclick="addTodo()">Add</button>
         <div>
+            <h2>Current List</h2>
             <ul id="todo-list"></ul>
         </div>
         <script>
             const inputel=document.getElementById("todo-input"); //get the input element
+            let count=1;
             function addTodo() {
+                const todo = inputel.value;
+                const li = document.createElement("li");
+                li.textContent = `${count}. ${todo}`;
+                const deletebtn=document.createElement("button");
+                deletebtn.content="🗑️";
+                deletebtn.onclick = function() {
+                    li.remove();
+                };
+                li.append(deletebtn);
+                document.getElementById("todo-list").appendChild(li);
                 console.log(inputel.value);
+                count++;
+                inputel.value="";
             }
         </script>
     </body>
