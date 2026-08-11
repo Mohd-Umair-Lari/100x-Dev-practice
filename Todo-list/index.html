@@ -1,0 +1,26 @@
+/* This is a todo list app (very basic)*/
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Todo List</title>
+    </head>
+    <body>
+        <h1>Todo List</h1>
+        <h2>Add a new todo</h2>
+        <div>
+            <input type="text" id="todo-input" placeholder="Enter a job">
+            <button onclick="addTodo()">Add</button>
+        <div>
+            <ul id="todo-list"></ul>
+        </div>
+        <script>
+            const inputel=document.getElementById("todo-input"); //get the input element
+            function addTodo() {
+                console.log(inputel.value);
+            }
+        </script>
+    </body>
+</html>
