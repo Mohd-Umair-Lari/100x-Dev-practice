@@ -3,17 +3,15 @@ function addTodo() {
     const inputel=document.getElementById("todo-input"); //get the input element
     const todo = inputel.value;
     const divel = document.createElement("div");
-    divel.innerHTML = `<div>${count}. ${todo} </div>`;
-    const deletebtn=document.createElement("button");
-    deletebtn.textContent="trash";
-    divel.append(deletebtn);
-    deletebtn.onclick=()=> deleteTodo(divel); // this line adds an event listener instead of calling the function directly
-    document.querySelector("todo-list").appendChild(divel);
+    divel.setAttribute("id","todo-"+count);
+    divel.innerHTML = `<div>${count}. ${todo} <button onclick="deleteTodo(${count})">Trash</button></div>`;
+    document.querySelector("#todo-list").appendChild(divel);
     console.log(inputel.value);
     count++;
     inputel.value="";
 }
 
-function deleteTodo(item){
+function deleteTodo(count){
+    item=document.querySelector("#todo-"+count);
     item.remove();
 }
