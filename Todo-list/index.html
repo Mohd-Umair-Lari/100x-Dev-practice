@@ -1,4 +1,4 @@
-/* This is a todo list app (very basic)*/
+<!-- This is a todo list app (very basic) -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Todo List</title>
+        <link href="style.css" rel="stylesheet">
     </head>
     <body>
         <h1>My Todo List</h1>
@@ -17,24 +18,6 @@
             <h2>Current List</h2>
             <ul id="todo-list"></ul>
         </div>
-        <script>
-            const inputel=document.getElementById("todo-input"); //get the input element
-            let count=1;
-            function addTodo() {
-                const todo = inputel.value;
-                const li = document.createElement("li");
-                li.textContent = `${count}. ${todo} `;
-                const deletebtn=document.createElement("button");
-                deletebtn.textContent="trash";
-                deletebtn.onclick = function() {
-                    li.remove();
-                };
-                li.append(deletebtn);
-                document.getElementById("todo-list").appendChild(li);
-                console.log(inputel.value);
-                count++;
-                inputel.value="";
-            }
-        </script>
+        <script src="script.js"></script>
     </body>
 </html>
