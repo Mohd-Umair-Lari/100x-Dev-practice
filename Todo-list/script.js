@@ -11,7 +11,8 @@ function addTodo() {
     inputel.value="";
 }
 
-function deleteTodo(count){
-    item=document.querySelector("#todo-"+count);
+function deleteTodo(num){
+    item=document.querySelector("#todo-"+num);
     item.remove();
+    count--;
 }
