@@ -1,0 +1,20 @@
+<!DOCTYPE>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body id="body">
+        <h2>Todo Test</h2>
+        <h3>To do</h3>
+        <h3>To do</h3>
+        <button onclick="deleteTodo()">Delet Todo</button>
+    </body>
+    <script>
+        function deleteTodo(){
+            var el=document.querySelector("h3");
+            parent=el.parentNode;
+            parent.removeChild(el);
+        }
+    </script>
+</html>
