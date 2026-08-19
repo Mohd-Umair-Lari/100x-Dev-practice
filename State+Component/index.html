@@ -12,28 +12,36 @@
         <div id="todos"></div>
         <script>
             let todos=[];
+            const inp=document.querySelector("input");
             function addTodo(){
                 todos.push({
-                    title: document.querySelector("input").value
-                })
+                    title: inp.value
+                });
+                inp.value="";
                 render();
             }
-            function deleteTodo(){
-                todos.pop();
+            function createComponent(todo,index){
+                const div=document.createElement("div");
+                const h1=document.createElement("h1");
+                const button=document.createElement("button");
+                button.innerHTML="Delete";
+                button.onclick = function() {
+                    deleteTodo(index);
+                };
+                h1.innerHTML=todo.title;
+                div.append(h1);
+                div.append(button);
+                return div;
+            }
+            function deleteTodo(index){
+                todos.splice(index, 1);
                 render();
             }
             function render(){
                 document.querySelector("#todos").innerHTML="";
                 for(let i=0;i<todos.length;i++){
-                    const todo=todos[i];
-                    const div=document.createElement("div");
-                    const h1=document.createElement("h1");
-                    const button=document.createElement("button");
-                    button.innerHTML="Delete";
-                    h1.innerHTML=todo.title;
-                    div.append(h1);
-                    div.append(button);
-                    document.querySelector("#todos").append(div);
+                    const elem=createComponent(todos[i],i);
+                    document.querySelector("#todos").append(elem);
                 }
             }
         </script>
