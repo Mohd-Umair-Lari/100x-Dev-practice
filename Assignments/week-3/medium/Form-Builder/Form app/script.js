@@ -1,8 +1,3 @@
-// ==========================================================================
-// Dynamic Form Builder - Beginner JavaScript
-// ==========================================================================
-
-// Global counter for unique field IDs
 let fieldCount = 0;
 
 // DOM Elements
@@ -16,12 +11,8 @@ const fieldCounter = document.getElementById("field-counter");
 const formActions = document.getElementById("form-actions");
 const dynamicForm = document.getElementById("dynamic-form");
 
-/**
- * Handles toggling placeholder input visibility based on chosen field type
- */
 function handleTypeChange() {
     const selectedType = fieldTypeSelect.value;
-    // Checkbox and Radio do not need placeholder inputs
     if (selectedType === "checkbox" || selectedType === "radio") {
         placeholderGroup.style.display = "none";
     } else {
@@ -29,30 +20,23 @@ function handleTypeChange() {
     }
 }
 
-/**
- * Adds a new input field to the live form preview
- */
 function addField() {
     const type = fieldTypeSelect.value;
     const label = fieldLabelInput.value.trim();
     const placeholder = fieldPlaceholderInput.value.trim();
 
-    // 1. Validation: Ensure label is not empty
     if (!label) {
         alert("Please enter a label for the field.");
         fieldLabelInput.focus();
         return;
     }
 
-    // 2. Increment unique counter
     fieldCount++;
     const fieldId = "field_" + fieldCount;
 
-    // 3. Create the container div for this field
     const fieldItem = document.createElement("div");
     fieldItem.className = "field-item";
 
-    // 4. Generate HTML according to field type
     let fieldHTML = "";
 
     if (type === "text" || type === "number" || type === "email") {
@@ -81,22 +65,18 @@ function addField() {
         `;
     }
 
-    // 5. Append Delete button to allow removing this specific field
     fieldHTML += `
         <button type="button" class="btn-delete" title="Delete Field" onclick="removeField(this)">✕</button>
     `;
 
     fieldItem.innerHTML = fieldHTML;
 
-    // 6. Append to the preview container
     fieldsContainer.appendChild(fieldItem);
 
-    // 7. Reset inputs and set focus back
     fieldLabelInput.value = "";
     fieldPlaceholderInput.value = "";
     fieldLabelInput.focus();
 
-    // 8. Update preview UI (counts and empty state)
     updateUI();
 }
 
@@ -112,9 +92,6 @@ function removeField(button) {
     }
 }
 
-/**
- * Clears all fields from the preview form
- */
 function clearAllFields() {
     const totalFields = fieldsContainer.querySelectorAll(".field-item").length;
     if (totalFields === 0) return;
@@ -125,16 +102,12 @@ function clearAllFields() {
     }
 }
 
-/**
- * Updates UI counter and empty state visibility
- */
+
 function updateUI() {
     const totalFields = fieldsContainer.querySelectorAll(".field-item").length;
 
-    // Update field counter badge
     fieldCounter.textContent = `${totalFields} Field${totalFields === 1 ? "" : "s"}`;
 
-    // Toggle empty state & form action buttons
     if (totalFields > 0) {
         emptyState.style.display = "none";
         formActions.classList.remove("hidden");
@@ -144,9 +117,6 @@ function updateUI() {
     }
 }
 
-/**
- * Handle form submission in the preview
- */
 dynamicForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -161,7 +131,6 @@ dynamicForm.addEventListener("submit", function (event) {
     console.log("Submitted Form Data:", entries);
 });
 
-// Allow pressing 'Enter' key in label input to quickly add field
 fieldLabelInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         event.preventDefault();
@@ -169,5 +138,4 @@ fieldLabelInput.addEventListener("keydown", function (event) {
     }
 });
 
-// Initial UI setup on page load
 updateUI();

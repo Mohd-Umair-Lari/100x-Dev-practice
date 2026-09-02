@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Form Builder</title>
-    <!-- Google Fonts for modern typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,13 +13,11 @@
 
 <body>
     <div class="app-container">
-        <!-- Header -->
         <header class="app-header">
             <h1>Dynamic Form Builder</h1>
             <p>Customize and generate your custom forms dynamically in real-time</p>
         </header>
 
-        <!-- Main Layout: Builder Controls & Preview -->
         <main class="builder-layout">
             <!-- Left Panel: Builder Controls -->
             <section class="card builder-card">
@@ -50,7 +47,8 @@
 
                 <div class="button-group">
                     <button type="button" id="add-btn" class="btn btn-primary" onclick="addField()">Add Field</button>
-                    <button type="button" id="clear-all-btn" class="btn btn-secondary" onclick="clearAllFields()">Clear All</button>
+                    <button type="button" id="clear-all-btn" class="btn btn-secondary" onclick="clearAllFields()">Clear
+                        All</button>
                 </div>
             </section>
 
@@ -61,14 +59,13 @@
                     <span id="field-counter" class="badge">0 Fields</span>
                 </div>
 
-                <!-- Empty State Message -->
                 <div id="empty-state" class="empty-state">
                     <div class="empty-icon">📝</div>
                     <p class="empty-title">Your form is empty</p>
-                    <p class="empty-desc">Select a field type on the left and click "Add Field" to build your custom form.</p>
+                    <p class="empty-desc">Select a field type on the left and click "Add Field" to build your custom
+                        form.</p>
                 </div>
 
-                <!-- Dynamic Form Preview Area -->
                 <form id="dynamic-form" class="dynamic-form">
                     <div id="fields-container" class="fields-container"></div>
                     <div id="form-actions" class="form-actions hidden">
