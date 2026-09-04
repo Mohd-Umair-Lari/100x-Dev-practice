@@ -51,21 +51,25 @@ app.put('/', (req, res) => {
     });
 });
 
-app.delete('/', (req, res) => {
-    const kidney_num = Number(req.query.kidney_num);
+function removeKidney(req, res) {
+    const kidney_num = parseInt(req.query.kidney_num, 10);
     const id = Number(req.query.n);
     var user = users.find(user => user.id === id);
     if (!user) {
         return res.status(404).send("User not found.");
     }
-    if (kidney_num < 0 || kidney_num >= user.kidney.length) {
+    if (Number.isNaN(kidney_num) || kidney_num < 0 || kidney_num >= user.kidney.length) {
         return res.status(400).send("Kidney not found.");
     }
     user.kidney.splice(kidney_num, 1);
     res.json({
-        msg: "Kidney removed."
+        msg: "Kidney " + kidney_num + " removed.",
+        remaining_kidneys: user.kidney
     });
-});
+}
+
+app.delete('/', removeKidney);
+app.get('/delete', removeKidney);
 
 app.post('/', (req, res) => {
     const status = req.body.status;
