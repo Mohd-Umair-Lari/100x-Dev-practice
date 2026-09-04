@@ -1,9 +1,14 @@
 const express = require('express');
 
 const app = express();
+app.use(express.json());
 
 var users = [
     {id: 1, name: 'John', age: 20, kidney:[{healthy: true},{healthy: true}]},
+    {id: 2, name: 'Sandra', age: 22, kidney:[{healthy: false},{healthy: true}]},
+    {id: 3, name: 'katie', age: 23, kidney:[{healthy: true},{healthy: false}]},
+    {id: 4, name: 'Charlie', age: 24, kidney:[{healthy: false},{healthy: true}]},
+    {id: 5, name: 'Kill', age: 25, kidney:[{healthy: true},{healthy: false}]},
 ]
 
 app.get('/',(req, res) => {
@@ -32,19 +37,49 @@ app.get('/',(req, res) => {
 });
 
 app.put('/', (req, res) => {
-    const status=req.body.status;
-    const id=req.query.n;
-    users[n].kidney.push({
-        healthy:status
-    })
+    const status = req.body.status;
+    const id = Number(req.query.n);
+    var user = users.find(user => user.id === id);
+    if (!user) {
+        return res.status(404).send("User not found.");
+    }
+    for (let i = 0; i < user.kidney.length; i++) {
+        user.kidney[i].healthy = status;
+    }
+    res.json({
+        msg: "Kidneys updated."
+    });
 });
 
 app.delete('/', (req, res) => {
-
+    const kidney_num = Number(req.query.kidney_num);
+    const id = Number(req.query.n);
+    var user = users.find(user => user.id === id);
+    if (!user) {
+        return res.status(404).send("User not found.");
+    }
+    if (kidney_num < 0 || kidney_num >= user.kidney.length) {
+        return res.status(400).send("Kidney not found.");
+    }
+    user.kidney.splice(kidney_num, 1);
+    res.json({
+        msg: "Kidney removed."
+    });
 });
 
 app.post('/', (req, res) => {
-
+    const status = req.body.status;
+    const id = Number(req.query.n);
+    var user = users.find(user => user.id === id);
+    if (!user) {
+        return res.status(404).send("User not found.");
+    }
+    user.kidney.push({
+        healthy: status
+    });
+    res.json({
+        msg: "Kidney added."
+    });
 });
 
 app.listen(3002);
