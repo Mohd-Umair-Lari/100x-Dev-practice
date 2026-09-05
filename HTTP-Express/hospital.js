@@ -51,8 +51,9 @@ app.put('/', (req, res) => {
     });
 });
 
-function removeKidney(req, res) {
-    const kidney_num = parseInt(req.query.kidney_num, 10);
+
+app.delete('/', (req,res)=>{
+    const kidney_num = Number(req.query.kidney_num);
     const id = Number(req.query.n);
     var user = users.find(user => user.id === id);
     if (!user) {
@@ -66,10 +67,7 @@ function removeKidney(req, res) {
         msg: "Kidney " + kidney_num + " removed.",
         remaining_kidneys: user.kidney
     });
-}
-
-app.delete('/', removeKidney);
-app.get('/delete', removeKidney);
+});
 
 app.post('/', (req, res) => {
     const status = req.body.status;
