@@ -1,4 +1,7 @@
 class Person{
+    constructor(){
+        this.species="homo sapiens";
+    }
     eat(){
         console.log("The person eats");
     }
