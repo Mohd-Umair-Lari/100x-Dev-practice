@@ -14,12 +14,10 @@ function getData(Dataid, getnextdata){
 
 let data=getData(123);
 
-data.then(()=>{
-    console.log(
-        "Promise completed successfully"
-    );
+data.then((res)=>{
+    console.log("Promise completed successfully",res);
 });
 
-data.catch(()=>{
-    console.log("Promise Failed")
+data.catch((rej)=>{
+    console.log("Promise Failed",rej)
 })
