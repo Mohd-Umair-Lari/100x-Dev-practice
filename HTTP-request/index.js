@@ -14,4 +14,9 @@ app.get('/',function(req,res){
     res.send(data);
 })
 
+app.post('/post',function(req,res){
+    data=fs.readFileSync('a.txt','utf-8');
+    res.send(data);
+})
+
 app.listen(3000);
