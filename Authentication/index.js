@@ -38,4 +38,14 @@ app.post('/signin', (req, res) => {
     res.status(200).send({token});
 });
 
+// this is the End point which cheks and validates the token for a specific user
+app.get("/me", (req, res) => {
+    const token = req.headers.authorization;
+    const user = users.find(user => user.token === token);
+    if (!user) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+    res.status(200).json({ message: 'User found', user: user, password: user.password });
+});
+
 app.listen(3000);
