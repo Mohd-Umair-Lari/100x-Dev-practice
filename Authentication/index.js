@@ -1,3 +1,5 @@
+// this is an example of stateful Authentication lookup and storage
+
 const express = require('express');
 
 const app = express();
