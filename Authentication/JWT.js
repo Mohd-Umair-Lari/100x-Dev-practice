@@ -27,9 +27,8 @@ app.post('/signin', (req, res) => {
         return res.status(401).json({ message: 'Invalid username or password' });
     }
     const token = jwt.sign({
-        username :username
-    },JWT_SECRET); // convert their username to a jwt
-    // user.token = token;
+        username : username
+    },JWT_SECRET); // convert their username to a jwt basd on the JWT secret
     res.status(200).send({token});
 });
 
