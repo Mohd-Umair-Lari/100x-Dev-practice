@@ -1,53 +1,67 @@
-// this is an example of stateful Authentication lookup and storage
-
 const express = require('express');
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = "umairlari";
 
 const app = express();
 app.use(express.json());
 
 const users = [];
 
-function generateToken() {
-    let options = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
-    let token = "";
-    for (let i = 0; i < 32; i++) {
-        token += options[Math.floor(Math.random() * options.length)];
+function auth(req, res, next) {
+    try {
+        const token = req.headers.authorization;
+        const decodeddata = jwt.verify(token, JWT_SECRET);
+        if (decodeddata.username) {
+            req.username = decodeddata.username;
+            next();
+        } else {
+            res.status(401).json({
+                message: "You are not logged in"
+            });
+        }
+    } catch (e) {
+        res.status(401).json({
+            message: "You are not logged in"
+        });
     }
-    return token;
 }
 
 app.get('/', (req, res) => {
-    res.status(200).json({ message: 'Welcome to the authentication API' });
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.post('/signup', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     users.push({ username, password });
-    res.status(201).json({ message: 'User created successfully' });
+    res.status(201).json({
+        message: "user created"
+    });
 });
 
 app.post('/signin', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    const user = users.find(user => user.username === username && user.password === password);  // find the user in the users array using the find function maps and filters
+    const user = users.find(usr => usr.username === username && usr.password === password);
     if (!user) {
         return res.status(401).json({ message: 'Invalid username or password' });
     }
-    const token = generateToken();
-    user.token = token;
-    res.status(200).send({token});
+    const token = jwt.sign({
+        username: user.username
+    }, JWT_SECRET);
+    res.status(200).json({ token });
 });
 
-// this is the End point which cheks and validates the token for a specific user
-app.get("/me", (req, res) => {
-    const token = req.headers.authorization;
-    const user = users.find(user => user.token === token);
-    if (!user) {
-        return res.status(401).json({ message: 'Unauthorized' });
+app.get('/me', auth, (req, res) => {
+    const founduser = users.find(usr => usr.username === req.username);
+    if (!founduser) {
+        return res.status(401).json({ message: 'User not found' });
     }
-    res.status(200).json({ message: 'User found', user: user, password: user.password });
+    res.status(200).json({
+        message: 'User found',
+        username: founduser.username,
+        password: founduser.password
+    });
 });
 
 app.listen(3000);
