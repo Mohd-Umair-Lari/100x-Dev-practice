@@ -30,6 +30,7 @@
         }
         async function logout() {
             localStorage.removeItem("token");
+            document.getElementById("information").innerHTML="";
         }
         async function getUserInformation() {
             const token = localStorage.getItem("token");
